@@ -1,3 +1,11 @@
+.main-img{
+    background-image: url(../img/family.png);
+    width: 1903px;
+    height: 950px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .index-main-content,.index-main-letters, .index-main-button {
     position: absolute;
     left: 50%;

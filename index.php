@@ -18,7 +18,7 @@
 
     <nav class="nav">
         <div class="nav-container">
-            <img src="assets/img/logo-head.png" alt="" width="175px">
+            <a href="index.php"><img src="assets/img/logo-head.png" alt="" width="175px"></a>
             <ul class="nav-options">
                 <a href="" class="medium-16-blue effect-1"><li>Internet</li></a>
                 <a href="" class="medium-16-blue effect-1"><li>Telefonia</li></a>
@@ -40,7 +40,7 @@
 
     <main>
         <div class="index-main-content">
-            <h1 class="hight-72-white">T E L E C A L L</h1>
+            <h1 class="hight-72-white" style="text-shadow: 1px 3px 7px rgba(0,0,0,0.68);">T E L E C A L L</h1>
         </div>
         <div class="index-main-letters">
             <p class="medium-12-white index-main-p">A solução completa você encontra aqui</p>
@@ -48,7 +48,7 @@
         <div class="index-main-button">
             <a href=""><button class="index-main-btn">SAIBA MAIS<span></span><span></span><span></span><span></span></button></a>
         </div>
-        <img src="assets/img/family.png" width="100%" height="100%" max-width="1903px" max-height="950px">
+        <div class="main-img"></div>
     </main>
 
 </body>
