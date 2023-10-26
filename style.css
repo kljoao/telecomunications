@@ -1,0 +1,23 @@
+/* CSS IMPORT */
+@import url(assets/css/index.css);
+@import url(assets/css/nav.css);
+@import url(assets/css/fonts.css);
+/* CSS IMPORT */
+
+/* FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+/* FONT IMPORTS */
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}

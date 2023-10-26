@@ -1,0 +1,73 @@
+.index-main-content,.index-main-letters, .index-main-button {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    margin-left: -200px;
+}
+
+.index-main-letters{
+    top: 40%;
+    margin-left: -115px;
+}
+
+.index-main-button{
+    top: 45%;
+    margin-left: -80px;
+}
+
+.index-main-btn {
+    cursor: pointer;
+    --c: #00ffd9;
+    color: rgb(96, 96, 96);
+    font-size: 16px;
+    border: 0.3em solid var(--c);
+    border-radius: 0.5em;
+    width: 12em;
+    height: 3em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    margin: 1em;
+}
+
+.index-main-btn span {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color: var(--c);
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+
+.index-main-btn:hover {
+    color: #ffffff;
+}
+
+.index-main-btn:hover span {
+    transform: translateY(0) scale(2);
+}
+
+.index-main-btn span:nth-child(1) {
+    --n: 1;
+}
+
+.index-main-btn span:nth-child(2) {
+    --n: 2;
+}
+
+.index-main-btn span:nth-child(3) {
+    --n: 3;
+}
+
+.index-main-btn span:nth-child(4) {
+    --n: 4;
+}
