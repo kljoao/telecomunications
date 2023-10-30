@@ -27,7 +27,7 @@
             </ul>
         </div>
         <div class="nav-left">
-            <a href=""><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
+            <a href="" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
             <div class="nav-contact">
             <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
                 <div>
@@ -51,6 +51,37 @@
         <div class="main-img"></div>
     </main>
 
+    <section>
+        <h1 class="hight-52-black solution-h1">Soluções</h1>
+        <p>Aqui você encontra as melhores soluções do mercado</p>
+        <br>
+        <br>
+        <br>
+        <div class="cards-container">
+            <a class="card1" href="#">
+                <h3>This is option 1</h3>
+                <p class="small">Card description with lots of great facts and interesting details.</p>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                        →
+                    </div>
+                </div>
+            </a>
+
+            <a class="card1" href="#">
+                <h3>This is option 1</h3>
+                <p class="small">Card description with lots of great facts and interesting details.</p>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                        →
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
