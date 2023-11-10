@@ -27,7 +27,7 @@
             </ul>
         </div>
         <div class="nav-left">
-            <a href="" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
+            <a href="assets/pages/login.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
             <div class="nav-contact">
             <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
                 <div>
@@ -52,8 +52,10 @@
     </main>
 
     <section>
-        <h1 class="hight-52-black solution-h1">Soluções</h1>
-        <p>Aqui você encontra as melhores soluções do mercado</p>
+        <div class="solutions-all">
+            <h1 class="hight-52-black solution-h1">Soluções</h1>
+            <p>Aqui você encontra as melhores soluções do mercado</p>
+        </div>
         <br>
         <br>
         <br>
@@ -80,6 +82,76 @@
         </div>
 
     </section>
+
+
+
+
+
+
+
+    <section class="contact-container">
+
+        <div class="contact-title" id="contato">
+        <h1 class="black-normal-40">Entre em <span class="blue-normal-40">Contato</span></h1>
+        </div>
+        <div class="contact-container-d">
+
+        <div class="contact-form-c">
+            <h1 class="black-normal-30">Fale Conosco</h1>
+            <br />
+            <br />
+            <p class="contact-p-area contact-form-p">
+            Para qualquer informação, dúvida ou comentário:
+            </p>
+            <p class="contact-form-p">(13) 3223-1224</p>
+            <span class="contact-line"></span>
+
+            <form class="contact-form-all">
+            <h2 class="black-normal-20">Nome:</h2>
+            <input type="text" class="input-large" required/>
+
+            <h2 class="black-normal-20">Telefone:</h2>
+            <input type="text" class="input-large" required/>
+
+            <h2 class="black-normal-20">Mensagem:</h2>
+            <textarea name="Message" class="textarea" required style="resize: none; padding: 10px" placeholder="Descreva sua requisição"></textarea>
+            <br>
+            <button class="contact-button">Enviar</button>
+            </form>
+        </div>
+
+        <div class="contact-escritorios">
+            <h1 class="black-normal-30">Escritório</h1>
+            <br>
+            <div>
+            <h2 class="black-normal-20">Brasil</h2>
+            <p class="contact-form-p">Centro empresarial Mario Henrique Simonsen<br>
+                Av. das Américas, 3434 | Bloco 1, Sala 505<br>
+                Barra da Tijuca | Rio de Janeiro, RJ</p>
+            <br>
+            <h2 class="black-normal-20">Portugal</h2>
+            <p class="contact-form-p">Avenida da Liberdade nº 245, 4º piso, sala 402 <br>
+                Lisboa, Portugal 1250-143<br></p>
+            <br>
+            <h2 class="black-normal-20">Estados Unidos</h2>
+            <p class="contact-form-p">848 Brickell Av – Suite 1235 | Miami, Florida, USA – 33131</p>
+            <br>
+            <h2 class="black-normal-20">Inglaterra</h2>
+            <p class="contact-form-p">8 Devonshire Squae, Londom EC2M 4YJ</p>
+            <br>
+            <h2 class="black-normal-20">Contatos</h2>
+            <p class="contact-form-p">Email: suporte@telecall.com</p>
+            <p class="contact-form-p">Tel: (21) 3030-1010</p>
+            <br>
+            <h2 class="black-normal-20">Carreiras</h2>
+            <p class="contact-form-p"><a href="https://carreirastelecall.solides.jobs" target="_blank">Clique aqui</a> para ver as vagas disponíveis</p>
+            </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <script src="script.js"></script>
 </body>

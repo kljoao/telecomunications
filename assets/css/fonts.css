@@ -27,3 +27,21 @@
     font-size: 72px;
     color: #000000;
 }
+
+.black-normal-20{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    color: #000000;
+}
+
+.black-normal-30{
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #000000;
+}
+
+.black-normal-40{
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+    color: #000000;
+}
