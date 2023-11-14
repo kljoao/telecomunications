@@ -227,7 +227,26 @@
         </div>
     </section>
 
+    <footer class="footer">
 
+        <div class="footer-head">
+
+            <img src="assets/img/logo-head.png" alt="Logo" class="footer-img">
+
+            <div class="footer-head-content">
+                <p class="white-normal-21">Inicio</p>
+                <p class="white-normal-21">Política de privacidade</p>
+                <p class="white-normal-21">Minha Conta</p>
+                <p class="white-normal-21">Contato</p>
+            </div>
+
+        </div>
+
+        <div class="footer-rights">
+            <p>Grupo 8 © Todos os direitos reservados</p>
+        </div>
+
+    </footer>
 
 
     <script src="script.js"></script>
