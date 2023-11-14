@@ -1,106 +1,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="../css/login.css" />
-    <title>Oficial TeleCall</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form action="#" class="sign-in-form">
-            <h2 class="title">Entrar</h2>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="E-mail" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Senha" />
-            </div>
-            <input type="submit" value="Login" class="btn solid" />
-          </form>
-          <form action="#" class="sign-up-form">
-            <h2 class="title">Registrar</h2>
 
-            <div class="input-field">
-              <i class="name-color fas fa-user"></i>
-              <input type="text" placeholder="Nome Completo*" minlength="8" maxlength="60" id="name" required/>
-            </div>
+<head>
+    <meta charset="UTF-6">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oficial Telecall</title>
+    <!-- Fonts API -->
+    <script src="https://kit.fontawesome.com/4713c304f5.js" crossorigin="anonymous"></script>
+    <!-- Fonts API -->
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..46,100..700,0..1,-50..200" />
+    <!-- Google Icons -->
+    <link rel="stylesheet" href="../../style.css">
+</head>
 
-            <p class="chekCPF">CPF Inválido*</p>
-            <div class="input-field">
-              <i class="cpf-color fas fa-id-card"></i>
-              <input type="text" placeholder="CPF*" id="cpf" minlength="14" maxlength="14" class="corporate-name" required/>
-            </div>
+<body>
 
-            <p class="checkDate">Digite uma data válida*</p>
-            <div class="input-field" id="signupForm">
-              <i class="dateColor fas fa-calendar"></i>
-              <input type="text" required placeholder="Data de Nascimento*" onblur="validarData()" minlength="10" maxlength="10" class="dateInput"/>
-            </div>
-
-
-            <p class="invalidEmail">E-mail inválido*</p>
-            <div class="input-field">
-              <i class="emailColor fas fa-envelope"></i>
-              <input type="text" name="email" placeholder="Email*" onblur="validacaoEmail(email)"  maxlength="60" class="emailInput">
-            </div>
-
-            <p class="duoemailcheck">Os e-mails não conferem*</p>
-            <div class="input-field">
-              <i class="confirmColor fas fa-envelope"></i>
-              <input type="email" placeholder="Confirme o Email*" required class="email-confirm"/>
-            </div>
-
-            <p class="passwordCheck">Mínimo de 8 dígitos, caracter especial e um <br>número*</p>
-            <div class="input-field">
-              <i class="passwordColor fas fa-lock"></i>
-              <input type="password" name="senha" placeholder="Senha*" required class="password" minlength="8" onblur="validarSenha(senha)"/>
-            </div>
-
-            <p class="confirmPasswordCheck">As senhas não conferem</p>
-            <div class="input-field">
-              <i class="confirmPassColor fas fa-lock"></i>
-              <input type="password" name="passwordConfirm" placeholder="Confirme a Senha*" required minlength="8" class="confirmaSenha" onkeyup="validarConfirmaSenha(passwordConfirm)"/>
-            </div>
-
-            <input type="submit" class="btn" value="Cadastrar" onclick="cadastro()"/>
-          </form>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.php"><img src="../img/logo-head.png" alt="" width="175px"></a>
+            <ul class="nav-options">
+                <a href="" class="medium-16-blue effect-1"><li>Internet</li></a>
+                <a href="" class="medium-16-blue effect-1"><li>Telefonia</li></a>
+                <a href="" class="medium-16-blue effect-1"><li>Móvel</li></a>
+                <a href="" class="medium-16-blue effect-1"><li>Redes</li></a>
+            </ul>
         </div>
-      </div>
-
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <a href="index.html"><img src="img/logo-white.png" alt="" class="logo-img"></a>
-            <h3>Novo por aqui?</h3>
-            <p>
-              Cadastre-se já clicando no botão abaixo. 
-              É rápido e simples.
-            </p>
-            <button class="btn transparent" id="sign-up-btn">Cadastre-se</button>
-          </div>
-          <img src="../img/cadastro.svg" class="image" alt="" />
+        <div class="nav-left">
+            <a href="assets/pages/login.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
+            <div class="nav-contact">
+            <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
+                <div>
+                    <p class="small-12-grey">Fale com o nosso time</p>
+                    <p class="medium-16-blue">(21) xxxxx-xxxx</p>
+                </div>
+            </div>
         </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <a href="index.html"><img src="img/logo-white.png" alt="" class="logo-img"></a>
-            <h3>Já é cadastrado?</h3>
-            <p>
-              Acesse sua conta fácil e rápido clicando no botão abaixo. 
-            </p>
-            <button class="btn transparent" id="sign-in-btn">Logar</button>
-          </div>
-          <img src="../img/login.svg" class="image" alt="" />
-        </div>
-      </div>
-    </div>
+    </nav>
 
-    <script src="javascript/login.js"></script>
-  </body>
+    <main>
+        <div>
+            <a href="index.php"><img src="../img/logo-head.png" alt="" width="175px"></a>
+            <p></p>
+        </div>
+    </main>
+
+
+
+
+    <script src="script.js"></script>
+</body>
+
 </html>

@@ -1,3 +1,5 @@
+@import url(colors.css);
+
 .medium-16-blue{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -10,16 +12,28 @@
     color: grey;
 }
 
+.small-17-grey{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+    color: grey;
+}
+
+.small-12-white{
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: white;
+}
+
 .medium-12-white{
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .hight-72-white{
     font-family: 'Roboto', sans-serif;
     font-size: 72px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .hight-52-black{
@@ -43,5 +57,30 @@
 .black-normal-40{
     font-family: 'Roboto', sans-serif;
     font-size: 40px;
+    color: #000000;
+}
+
+.big-white-kdam-120{
+    font-family: 'Kdam Thmor Pro', sans-serif;;
+    font-size: 120px;
+    color: #ffffff;
+}
+
+.big-white-kdam-42{
+    font-family: 'Kdam Thmor Pro', sans-serif;;
+    font-size: 42px;
+    color: #ffffff;
+}
+
+.big-white-kdam-32{
+    font-family: 'Kdam Thmor Pro', sans-serif;;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.medium-black-thin-15{
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
     color: #000000;
 }

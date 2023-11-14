@@ -80,6 +80,30 @@
     --n: 4;
 }
 
+.index-informations-container{
+    background-color: rgba(0, 89, 255, 0.499);
+}
+
+.index-informations-all{
+    display: flex;
+    justify-content: center;
+}
+
+.index-informations-itens{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.index-button{
+    cursor: pointer;
+    background-color: rgba(0, 89, 255, 0.499);
+    padding: 10px;
+    border-radius: 5000px;
+    border: 0px;
+}
+
 .solutions-all{
     text-align: center;
+    margin: 50px;
 }

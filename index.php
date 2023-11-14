@@ -51,18 +51,63 @@
         <div class="main-img"></div>
     </main>
 
+
+    <!-- ELEIÇOES -->
+    <section class="index-informations-container">
+        <div class="index-informations-all">
+            <div class="index-informations-itens">
+                <h1 class="big-white-kdam-120">+</h1>
+                <div>
+                    <h3 class="big-white-kdam-42">20 ANOS</h3>
+                    <p class="big-white-kdam-32" style="margin-top: -20px;">NO MERCADO</p>
+                </div>
+            </div>
+
+            <div class="index-informations-itens">
+                <h1 class="big-white-kdam-120">+</h1>
+                <div>
+                    <h3 class="big-white-kdam-42">3 PAÍSES</h3>
+                    <p class="big-white-kdam-32" style="margin-top: -20px;">PRESENTE</p>
+                </div>
+            </div>
+
+            <div class="index-informations-itens">
+                <h1 class="big-white-kdam-120">+</h1>
+                <div>
+                    <h3 class="big-white-kdam-42">5000</h3>
+                    <p class="big-white-kdam-32" style="margin-top: -20px;">CLIENTES</p>
+                </div>
+            </div>
+
+            <div class="index-informations-itens">
+                <h1 class="big-white-kdam-120">+</h1>
+                <div>
+                    <h3 class="big-white-kdam-42">5</h3>
+                    <p class="big-white-kdam-32" style="margin-top: -20px;">PREMIAÇÕES</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SOLUÇÕES -->
     <section>
         <div class="solutions-all">
             <h1 class="hight-52-black solution-h1">Soluções</h1>
-            <p>Aqui você encontra as melhores soluções do mercado</p>
+            <p class="small-17-grey">Aqui você encontra as melhores soluções do mercado</p>
         </div>
         <br>
         <br>
         <br>
         <div class="cards-container">
             <a class="card1" href="#">
-                <h3>This is option 1</h3>
-                <p class="small">Card description with lots of great facts and interesting details.</p>
+                <h3 style="align-items: center;" class="black-normal-20"><i class="fa fa-globe" style="color: #CA1C2A"></i>  Internet</h3>
+                <br>
+                <br>
+                <p class="medium-black-thin-15">Os melhores planos de conexão você só encontra com a gente.</p>
+                <br>
+                <br>
+                <button class="index-button small-12-white">Saiba Mais</button>
                 <div class="go-corner" href="#">
                     <div class="go-arrow">
                         →
@@ -71,24 +116,56 @@
             </a>
 
             <a class="card1" href="#">
-                <h3>This is option 1</h3>
-                <p class="small">Card description with lots of great facts and interesting details.</p>
+                <h3 style="align-items: center;" class="black-normal-20"><i class="fa fa-phone" style="color: #CA1C2A"></i>  Telefonia</h3>
+                <br>
+                <br>
+                <p class="medium-black-thin-15">Melhore o desempenho da sua empresa com nossa telefonia.</p>
+                <br>
+                <br>
+                <button class="index-button small-12-white">Saiba Mais</button>
                 <div class="go-corner" href="#">
                     <div class="go-arrow">
                         →
                     </div>
                 </div>
             </a>
+
+            <a class="card1" href="#">
+            <h3 style="align-items: center;" class="black-normal-20"><i class="fa-solid fa-mobile" style="color: #CA1C2A"></i>  Rede Móvel</h3>
+                <br>
+                <br>
+                <p class="medium-black-thin-15">Conheça nossos serviços móveis para você se conectar o tempo todo.</p>
+                <br>
+                <br>
+                <button class="index-button small-12-white">Saiba Mais</button>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                        →
+                    </div>
+                </div>
+            </a>
+
+            <a class="card1" href="#">
+            <h3 style="align-items: center;" class="black-normal-20"><i class="fa fa-database" style="color: #CA1C2A"></i>  Proteção de Dados</h3>
+                <br>
+                <br>
+                <p class="medium-black-thin-15">Proteção nunca é demais, deixe-nos cuidar disso para você.</p>
+                <br>
+                <br>
+                <button class="index-button small-12-white">Saiba Mais</button>
+                <div class="go-corner" href="#">
+                    <div class="go-arrow">
+                        →
+                    </div>
+                </div>
+            </a>
+
+
         </div>
 
     </section>
 
-
-
-
-
-
-
+    <!-- CONTATO -->
     <section class="contact-container">
 
         <div class="contact-title" id="contato">
