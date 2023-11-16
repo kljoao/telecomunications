@@ -7,12 +7,21 @@ main{
     justify-content: space-between;
 }
 
-#nome-attention, #cpf-attention{
-    visibility: hidden;
-    color: red;
+.register-container{
+    margin: 10px;
 }
 
-.register-display-1{
+.intl-tel-input .country-list {
+    max-height: 150px;
+}
+
+#nome-attention, #cpf-attention, #materno-attention{
+    visibility: hidden;
+    color: red;
+    margin-left: 15px;
+}
+
+.register-display-1, .register-display-2{
     display: flex;
     gap: 10px;
 }

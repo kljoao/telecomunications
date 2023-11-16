@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..46,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="../css/register.css">
     <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 </head>
 
 <body>
@@ -43,7 +45,7 @@
 
         <div class="register-grid">
 
-            <div>
+            <div class="register-container">
                 <section class="register-display-1">
                     <div>
                         <p id="nome-attention">Nome Inválido.</p>
@@ -61,13 +63,20 @@
                         </label>
                     </div>
                 </section>
-                
+                <br>
                 <section class="register-display-2">
                     <div>
-                        <p id="nome-attention">Nome Inválido.</p>
+                        <p id="materno-attention">Nome Inválido.</p>
                         <label for="" class="text-label">
-                            <i class="fa-solid fa-user" id="nome-icon"></i>
+                            <i class="fa-solid fa-person-breastfeeding" id="materno-icon"></i>
                             <input type="text" placeholder="Nome Materno**" class="long-input" id="name" minlength="15" maxlength="80">
+                        </label>
+                    </div>
+
+                    <div>
+                        <p id="materno-attention">Número inválido.</p>
+                        <label for="" class="text-label">
+                            <input type="text" class="long-input" minlength="15" maxlength="80" id="phone">
                         </label>
                     </div>
                 </section>
@@ -103,7 +112,13 @@
 
     </footer>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" 
+        });
+    </script>
     <script src="../script/register.js"></script>
 </body>
 
