@@ -15,7 +15,7 @@ main{
     max-height: 150px;
 }
 
-#nome-attention, #cpf-attention, #materno-attention{
+#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention{
     visibility: hidden;
     color: red;
     margin-left: 15px;
@@ -26,7 +26,7 @@ main{
     gap: 10px;
 }
 
-.text-label, .short-text-label{
+.text-label, .short-text-label, .most-short-text-label{
     display: flex;
     align-items: center;
     border: 0.3px solid rgba(0, 0, 0, 0.163);
@@ -37,26 +37,39 @@ main{
     -moz-box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.18);
 }
 
-.text-label i, .short-text-label i{
+.text-label i, .short-text-label i, .most-short-text-label i{
     padding: 10px;
 }
 
 /* topo | direita | inferior | esquerda */
-.long-input, .short-input{
+.long-input, .short-input, .number-input, .data-input{
     padding: 10px 0px 10px 0px;
     border: 0px;
     width: 300px;
     border-radius: 50px;
 }
 
+.number-input{
+    padding: 11px;
+    width: 200px;
+}
+
 .short-text-label{
     width: 250px !important;
 }
 
-.short-input{
-    width: 250px !important;
+.most-short-text-label{
+    width: 140px !important;
 }
 
-.long-input:focus, .short-input:focus{
+.data-input{
+    width: 105px;
+}
+
+.short-input{
+    width: 200px !important;
+}
+
+.long-input:focus, .short-input:focus, .number-input:focus, .data-input:focus{
     outline: none;
 }

@@ -1,5 +1,7 @@
 validName = false
 validCPF = false
+validMaterno = false
+validNumber = false
 
 //Validador Nome
   const nameInput = document.querySelector("#name");
@@ -120,3 +122,65 @@ cpfInput.addEventListener('input', function() {
   }
 });
 //Validador CPF
+
+
+
+
+//Validador Nome Materno
+const nomeMaternoInput = document.querySelector("#nomeMaternoInput");
+
+nomeMaternoInput.addEventListener("keypress", function(e) {
+    if(!checkChar(e)) {
+      e.preventDefault();
+  }
+  // FUNÇÃO PARA BLOQUEAR CARACTERES ESPECIAIS E NÚMEROS
+});
+function checkChar(e) {
+    var char = String.fromCharCode(e.keyCode);
+    var pattern = '[a-zA-Z ^~´`óòõãáàéèê]';
+    if (char.match(pattern)) {
+    return true;
+  }
+}
+
+const maternoAttention = document.querySelector('#materno-attention');
+const maternoIcon = document.querySelector('#materno-icon');
+// VALIDADOR DE TAMANHO DE NOME
+nomeMaternoInput.addEventListener('keyup', () => {
+  if(nomeMaternoInput.value.length < 15){
+    maternoAttention.setAttribute('style', 'visibility: visible;');
+    maternoIcon.setAttribute('style', 'color: red');
+    nomeMaternoInput.setAttribute('style', 'color: red;');
+    validMaterno = false
+  }
+  else{
+    maternoAttention.setAttribute('style', 'visibility: hidden;');
+    maternoIcon.setAttribute('style', 'color: green');
+    nomeMaternoInput.setAttribute('style', 'color: green;')
+    validMaterno = true
+  }
+})
+//Validador Nome Materno
+
+
+// Validador Numero
+var telefoneinput = document.querySelector("#phone");
+const numberAttention = document.querySelector('#number-attention');
+var iti = window.intlTelInput(telefoneinput, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" 
+});
+
+telefoneinput.addEventListener('keyup', () => {
+    // Quando você for enviar o número para o backend
+    if(iti.isValidNumber()) { // Verifica se o número é válido
+        numberAttention.setAttribute('style', 'visibility: hidden;')
+        telefoneinput.setAttribute('style', 'color: green;')
+        var fullNumber = iti.getNumber(); // Isso retornará o número completo, por exemplo "+5521964865400"
+        validNumber = true
+    } else {
+        numberAttention.setAttribute('style', 'visibility: visible;')
+        telefoneinput.setAttribute('style', 'color: red;') // Mostra a mensagem de erro se o número for inválido
+        validNumber = false
+    }
+});
+// Validador Numero

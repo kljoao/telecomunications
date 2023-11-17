@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 
 <body>
@@ -69,14 +71,22 @@
                         <p id="materno-attention">Nome Inválido.</p>
                         <label for="" class="text-label">
                             <i class="fa-solid fa-person-breastfeeding" id="materno-icon"></i>
-                            <input type="text" placeholder="Nome Materno**" class="long-input" id="name" minlength="15" maxlength="80">
+                            <input type="text" placeholder="Nome Materno**" class="long-input" minlength="15" maxlength="80" id="nomeMaternoInput">
                         </label>
                     </div>
 
                     <div>
-                        <p id="materno-attention">Número inválido.</p>
-                        <label for="" class="text-label">
-                            <input type="text" class="long-input" minlength="15" maxlength="80" id="phone">
+                        <p id="number-attention">Número inválido.</p>
+                        <label for="" class="short-text-label">
+                            <input type="text" class="number-input" minlength="15" maxlength="80" id="phone">
+                        </label>
+                    </div>
+
+                    <div>
+                        <p id="data-attention">Data inválida.</p>
+                        <label for="" class="most-short-text-label">
+                            <i class="fa fa-calendar-days" id="data-icon"></i>
+                            <input type="text" class="data-input" minlength="15" maxlength="80" id="birthdate" placeholder="dd/mm/aaaa">
                         </label>
                     </div>
                 </section>
@@ -113,10 +123,30 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script>
-        var input = document.querySelector("#phone");
-        window.intlTelInput(input, {
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" 
+        $(document).ready(function(){
+        $('#birthdate').mask('00/00/0000');
+
+        $('#birthdate').on('keyup', function() {
+            var birthdate = $(this).val();
+            var birthdateMoment = moment(birthdate, 'DD/MM/YYYY');
+            
+            if (!birthdateMoment.isValid()) {
+            alert('Data inválida.');
+            } else {
+            var years = moment().diff(birthdateMoment, 'years');
+            
+            if (years < 18) {
+                alert('Você precisa ter no mínimo 18 anos.');
+            } else if (years > 100) {
+                alert('A idade máxima permitida é 100 anos.');
+            } else {
+                // A data é válida e a idade está no intervalo permitido.
+                // Você pode continuar com a submissão do formulário.
+            }
+            }
+        });
         });
     </script>
     <script src="../script/register.js"></script>
