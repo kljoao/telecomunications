@@ -15,18 +15,18 @@ main{
     max-height: 150px;
 }
 
-#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention{
+#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention, #cep-attention, #numero-attention, #sexo-attention{
     visibility: hidden;
     color: red;
     margin-left: 15px;
 }
 
-.register-display-1, .register-display-2{
+.register-display{
     display: flex;
     gap: 10px;
 }
 
-.text-label, .short-text-label, .most-short-text-label{
+.text-label, .short-text-label, .most-short-text-label, .block-text-label, .block-text-medium-label{
     display: flex;
     align-items: center;
     border: 0.3px solid rgba(0, 0, 0, 0.163);
@@ -37,21 +37,40 @@ main{
     -moz-box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.18);
 }
 
-.text-label i, .short-text-label i, .most-short-text-label i{
+.block-most-short-text-label{
+    box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.18);
+    -webkit-box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.18);
+    -moz-box-shadow: 10px 10px 5px -2px rgba(0,0,0,0.18);
+}
+
+.block-text-medium-label{
+    width: 250px;
+}
+
+.text-label i, .short-text-label i, .most-short-text-label i, .block-text-label i, .block-text-medium-label i, .block-most-short-text-label i{
     padding: 10px;
 }
 
 /* topo | direita | inferior | esquerda */
-.long-input, .short-input, .number-input, .data-input{
+.long-input, .short-input, .number-input, .ushort-input, .block-input, .block-medium-input, .block-short-input, .block-most-short-text-label, .sex-selection{
     padding: 10px 0px 10px 0px;
     border: 0px;
     width: 300px;
     border-radius: 50px;
 }
 
+.block-medium-input{
+    width: 250px;
+}
+
+.block-text-label, .block-input, .block-medium-input, .block-text-medium-label, .block-short-input, .block-most-short-text-label{
+    background-color: #e7e7e7 !important;
+    cursor: not-allowed;
+}
+
 .number-input{
     padding: 11px;
-    width: 200px;
+    width: 250px;
 }
 
 .short-text-label{
@@ -62,7 +81,7 @@ main{
     width: 140px !important;
 }
 
-.data-input{
+.ushort-input, .block-short-input{
     width: 105px;
 }
 
@@ -70,6 +89,23 @@ main{
     width: 200px !important;
 }
 
-.long-input:focus, .short-input:focus, .number-input:focus, .data-input:focus{
+.long-input:focus, .short-input:focus, .number-input:focus, .data-input:focus, .block-medium-input:focus, .block-input:focus, .ushort-input:focus, .block-short-input:focus, .sex-selection:focus{
     outline: none;
+}
+
+.cadastroBtn, .limparBtn{
+    padding: 10px;
+    border: 0px;
+    background-color: rgb(0, 209, 0);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.limparBtn{
+    background-color: red !important;
+}
+
+.register-buttons{
+    display: flex;
+    gap: 10px;
 }

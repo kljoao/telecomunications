@@ -1,3 +1,7 @@
+<?php
+    include('../../app/database.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,6 +21,54 @@
 </head>
 
 <body>
+
+<?php
+    if(isset($_POST['cadastroSubmit'])){
+        $nome = $_POST['nome'];
+        $sexo = $_POST['sexo'];
+        $cpf = $_POST['cpf'];
+        $nome_materno = $_POST['materno'];
+        $celular = $_POST['phone'];
+        $cep = $_POST['cep'];
+        $rua = $_POST['rua'];
+        $bairro = $_POST['bairro'];
+        $casa_numero = $_POST['numero'];
+        $cidade = $_POST['cidade'];
+        $estado = $_POST['estado'];
+        $login = $_POST['login'];
+        $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Criptografando a senha
+        $nascimento = $_POST['nascimento'];
+
+        $celular = preg_replace('/[^0-9\+]/', '', $_POST['phone']);
+
+        if(empty($nome) || empty($sexo) || empty($cpf) || empty($nome_materno) || empty($celular) || empty($cep) || empty($rua) || empty($bairro) || empty($casa_numero) || empty($cidade) || empty($estado) || empty($login) || empty($senha) || empty($nascimento)){
+            echo '<script>
+              Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Verifique os campos e tente novamente.",
+                });
+                </script>';
+        } else {
+            $stmt = $mysqli->prepare("INSERT INTO usuarios(nome,sexo,cpf,nome_materno,celular,cep,rua,bairro,casa_numero,cidade,estado,login_usuario,senha,nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssssssssss", $nome, $sexo, $cpf, $nome_materno, $celular, $cep, $rua, $bairro, $casa_numero, $cidade, $estado, $login, $senha, $nascimento);
+
+            if($stmt->execute()){
+                echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Usuário cadastrado.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                </script>';
+            } else {
+                echo "Erro: " . $stmt->error;
+            }
+        }
+    }
+?>
 
     <nav class="nav">
         <div class="nav-container">
@@ -47,13 +99,13 @@
 
         <div class="register-grid">
 
-            <div class="register-container">
-                <section class="register-display-1">
+            <form method="POST" action="" class="register-container">
+                <section class="register-display">
                     <div>
                         <p id="nome-attention">Nome Inválido.</p>
                         <label for="" class="text-label">
                             <i class="fa-solid fa-user" id="nome-icon"></i>
-                            <input type="text" placeholder="Nome Completo**" class="long-input" id="name" minlength="15" maxlength="80">
+                            <input type="text" placeholder="Nome Completo**" class="long-input" id="name" minlength="15" maxlength="80" name="nome">
                         </label>
                     </div>
 
@@ -61,24 +113,39 @@
                         <p id="cpf-attention">CPF Inválido.</p>
                         <label for="" class="short-text-label">
                             <i class="fa fa-id-badge" id="cpf-icon"></i>
-                            <input type="text" placeholder="CPF**" class="short-input" id="cpf" minlength="14" maxlength="14">
+                            <input type="text" placeholder="CPF**" class="short-input" id="cpf" minlength="14" maxlength="14" name="cpf">
+                        </label>
+                    </div>
+
+                    <div>
+                        <p id="sexo-attention">Defina um sexo.</p>
+                        <label for="" class="short-text-label">
+                            <i class="fa-solid fa-person-half-dress" id="sexo-icon"></i>
+                            <select name="sexo" id="" class="sex-selection" name="sexo">
+                                <option value="">Masculino</option>
+                                <option value="">Feminino</option>
+                                <option value="">Transgênero</option>
+                                <option value="">Não-binário</option>
+                                <option value="">Outros</option>
+                                <option value="">Prefiro não responder</option>
+                            </select>
                         </label>
                     </div>
                 </section>
                 <br>
-                <section class="register-display-2">
+                <section class="register-display">
                     <div>
                         <p id="materno-attention">Nome Inválido.</p>
                         <label for="" class="text-label">
                             <i class="fa-solid fa-person-breastfeeding" id="materno-icon"></i>
-                            <input type="text" placeholder="Nome Materno**" class="long-input" minlength="15" maxlength="80" id="nomeMaternoInput">
+                            <input type="text" placeholder="Nome Materno**" class="long-input" minlength="15" maxlength="80" id="nomeMaternoInput" name="materno">
                         </label>
                     </div>
 
                     <div>
                         <p id="number-attention">Número inválido.</p>
                         <label for="" class="short-text-label">
-                            <input type="text" class="number-input" minlength="15" maxlength="80" id="phone">
+                            <input type="text" class="number-input" minlength="10" maxlength="80" id="phone" name="phone">
                         </label>
                     </div>
 
@@ -86,20 +153,103 @@
                         <p id="data-attention">Data inválida.</p>
                         <label for="" class="most-short-text-label">
                             <i class="fa fa-calendar-days" id="data-icon"></i>
-                            <input type="text" class="data-input" minlength="15" maxlength="80" id="birthdate" placeholder="dd/mm/aaaa">
+                            <input type="text" class="ushort-input" maxlength="80" id="birthdate" placeholder="dd/mm/aaaa" name="nascimento">
                         </label>
                     </div>
                 </section>
-            </div>
+                <br>
+                <section class="register-display">
+                    <div>
+                        <p id="cep-attention">CEP Inválido.</p>
+                        <label for="" class="short-text-label">
+                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
+                            <input type="text" placeholder="CEP**" class="short-input" id="cep" minlength="8" maxlength="14" name="cep">
+                        </label>
+                    </div>
 
-            <img src="../img/register.svg" alt="">
+                    <div>
+                        <p id="cep-attention">JAPH</p>
+                        <label for="" class="block-text-label">
+                            <i class="fa-solid fa-road" id="rua-icon"></i>
+                            <input type="text" placeholder="Rua**" class="block-input" maxlength="80" id="rua" name="rua" readonly>
+                        </label>
+                    </div>
+                    
+                    <div>
+                        <p id="cep-attention">JAPH</p>
+                        <label for="" class="block-text-medium-label">
+                            <i class="fa-solid fa-city" id="bairro-icon"></i>
+                            <input type="text" placeholder="Bairro**" class="block-medium-input" maxlength="80" id="bairro" name="bairro" readonly>
+                        </label>
+                    </div>
+                </section>
+                <br>
+                <section class="register-display">
+                    <div>
+                        <p id="numero-attention">Número Inválido.</p>
+                        <label for="" class="most-short-text-label">
+                            <i class="fa-solid fa-house" id="numero-icon"></i>
+                            <input type="text" class="ushort-input" maxlength="80" id="numero" placeholder="Nú da casa**" name="numero">
+                        </label>
+                    </div>
+                    <div>
+                        <p id="cep-attention">JAPH</p>
+                        <label for="" class="block-text-medium-label">
+                            <i class="fa-solid fa-city" id="cidade-icon"></i>
+                            <input type="text" placeholder="Cidade**" class="block-medium-input" maxlength="80" id="cidade" name="cidade" readonly>
+                        </label>
+                    </div>
+                    <div>
+                        <p id="cep-attention">JAPH</p>
+                        <label for="" class="block-text-medium-label">
+                            <i class="fa-solid fa-city" id="estado-icon"></i>
+                            <input type="text" placeholder="Estado**" class="block-medium-input" maxlength="80" id="estado" name="estado" readonly>
+                        </label>
+                    </div>
+                </section>
+                <br>
+                <br>
+                <br>
+                <br>
+                <hr>    
+                <br>
+                <section class="register-display">
+                    <div>
+                        <p id="cep-attention">Login Inválido.</p>
+                        <label for="" class="short-text-label">
+                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
+                            <input type="text" placeholder="Defina um login**" class="short-input" id="login" minlength="8" maxlength="14" name="login">
+                        </label>
+                    </div>
+                </section>
+                <br>
+                <section class="register-display">
+                    <div>
+                        <p id="cep-attention">Senha Inválida.</p>
+                        <label for="" class="short-text-label">
+                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
+                            <input type="password" placeholder="Defina uma senha**" class="short-input" id="senha" minlength="8" maxlength="14" name="senha">
+                        </label>
+                    </div>
+
+                    <div>
+                        <p id="cep-attention">Senha Inválida.</p>
+                        <label for="" class="short-text-label">
+                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
+                            <input type="password" placeholder="Confirme sua senha**" class="short-input" id="confirmaSenha" minlength="8" maxlength="14">
+                        </label>
+                    </div>
+                </section>
+                <br><br>
+                <div class="register-buttons">
+                    <input type="submit" class="cadastroBtn small-12-white" name="cadastroSubmit" value="Cadastrar">
+                    <input type="reset" class="limparBtn small-12-white" name="cadastroLimpar" value="Limpar">
+                </div>
+            </form>
 
         </div>
 
     </main>
-
-
-
 
     <footer class="footer">
 
@@ -128,7 +278,7 @@
         $(document).ready(function(){
         $('#birthdate').mask('00/00/0000');
 
-        $('#birthdate').on('keyup', function() {
+        $('#birthdate').on('focusout', function() {
             var birthdate = $(this).val();
             var birthdateMoment = moment(birthdate, 'DD/MM/YYYY');
             

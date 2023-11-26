@@ -170,7 +170,7 @@ var iti = window.intlTelInput(telefoneinput, {
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js" 
 });
 
-telefoneinput.addEventListener('keyup', () => {
+telefoneinput.addEventListener('blur', () => {
     // Quando você for enviar o número para o backend
     if(iti.isValidNumber()) { // Verifica se o número é válido
         numberAttention.setAttribute('style', 'visibility: hidden;')
@@ -183,4 +183,34 @@ telefoneinput.addEventListener('keyup', () => {
         validNumber = false
     }
 });
+$(document).ready(function(){
+  $('#phone').mask('(00) 00000-0000');
+});
 // Validador Numero
+
+const cep = document.querySelector('#cep');
+const bairro = document.querySelector('#bairro');
+const rua = document.querySelector('#rua');
+const numero = document.querySelector('#numero');
+const cidade = document.querySelector('#cidade');
+const estado = document.querySelector('#estado');
+
+cep.addEventListener('focusout', () => {
+  const cepValue = cep.value;
+  const urlCep = `https://viacep.com.br/ws/${cepValue}/json/`;
+
+  if(cepValue.length !== 8){
+    // AQUI É MENSAGEM DE ERRO
+  }
+
+  fetch(urlCep).then(function(response){
+    response.json().then(function(data){
+      rua.value = data.logradouro;
+      bairro.value = data.bairro;
+      cidade.value = data.localidade;
+      estado.value = data.uf;
+    });
+  });
+});
+
+
