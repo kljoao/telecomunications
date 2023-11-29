@@ -31,7 +31,7 @@
             </ul>
         </div>
         <div class="nav-left">
-            <a href="assets/pages/register.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
+            <a href="assets/pages/login.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
             <div class="nav-contact">
             <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
                 <div>

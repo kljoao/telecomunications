@@ -130,7 +130,7 @@ cpf.addEventListener('', function() {
 
 
 //Validador Nome Materno
-const nomeMaterno = document.querySelector("#nomeMaterno");
+const nomeMaterno = document.querySelector("#nomeMaternoInput");
 
 nomeMaterno.addEventListener("keypress", function(e) {
     if(!checkChar(e)) {
@@ -169,27 +169,30 @@ nomeMaterno.addEventListener('keyup', () => {
 // Validador Numero
 var telefone = document.querySelector("#phone");
 const numberAttention = document.querySelector('#number-attention');
-var iti = window.intlTel(telefone, {
-    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-/17.0.8/js/utils.js" 
+var iti = window.intlTelInput(telefone, {
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    nationalMode: false
 });
 
-telefone.addEventListener('blur', () => {
-    // Quando você for enviar o número para o backend
-    if(iti.isValidNumber()) { // Verifica se o número é válido
+telefone.addEventListener('blur', function() {
+    var fullNumber = iti.getNumber();
+    if (iti.isValidNumber()) {
         numberAttention.setAttribute('style', 'visibility: hidden;')
         telefone.setAttribute('style', 'color: green;')
-        var fullNumber = iti.getNumber(); // Isso retornará o número completo, por exemplo "+5521964865400"
         validNumber = true
     } else {
         numberAttention.setAttribute('style', 'visibility: visible;')
-        telefone.setAttribute('style', 'color: red;') // Mostra a mensagem de erro se o número for inválido
+        telefone.setAttribute('style', 'color: red;')
         validNumber = false
     }
 });
-$(document).ready(function(){
-  $('#phone').mask('(00) 00000-0000');
+
+telefone.addEventListener('input', function() {
+    var countryCode = iti.getSelectedCountryData().dialCode;
+    if (telefone.value.length < countryCode.length || telefone.value.slice(0, countryCode.length) !== "+" + countryCode) {
+        telefone.value = "+" + countryCode;
+    }
 });
-// Validador Numero
 
 const cep = document.querySelector('#cep');
 const cepAttention = document.querySelector('#cep-attention');
@@ -260,6 +263,7 @@ cep.addEventListener('focusout', () => {
 
 const dataAttention = document.querySelector('#data-attention')
 const dataIcon = document.querySelector('#data-icon')
+const birthdateInput = document.querySelector('#birthdate')
 $(document).ready(function(){
   $('#birthdate').mask('00/00/0000');
 
@@ -306,6 +310,7 @@ $(document).ready(function(){
       } else {
         dataAttention.setAttribute('style', 'visibility: hidden')
         dataIcon.setAttribute('style', 'color: green;')
+        birthdateInput.setAttribute('style', 'color: green;')
         validIdade = true
       }
       }

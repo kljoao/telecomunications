@@ -43,13 +43,17 @@
         $cpf = preg_replace('/[^0-9\+]/', '', $_POST['cpf']);
         $cep = preg_replace('/[^0-9\+]/', '', $_POST['cep']);
 
-
         // Verificação de CPF Primary Key
         $verifyCpf = $mysqli->prepare("SELECT * FROM usuarios WHERE cpf = ?");
         $verifyCpf->bind_param("s", $cpf);
         $verifyCpf->execute();
         $CpfResult = $verifyCpf->get_result();
-        // Verificação de CPF Primary Key
+
+        // Verificação de número de telefone
+        $verifyPhone = $mysqli->prepare("SELECT * FROM usuarios WHERE celular = ?");
+        $verifyPhone->bind_param("s", $celular);
+        $verifyPhone->execute();
+        $PhoneResult = $verifyPhone->get_result();
 
         if(empty($nome) || empty($sexo) || empty($cpf) || empty($nome_materno) || empty($celular) || empty($cep) || empty($rua) || empty($bairro) || empty($casa_numero) || empty($cidade) || empty($estado) || empty($login) || empty($senha) || empty($nascimento)){
             echo '<script>
@@ -66,6 +70,15 @@
                 icon: "error",
                 title: "Oops...",
                 text: "Este CPF já foi cadastrado.",
+            });
+        </script>';
+        }
+        elseif($PhoneResult->num_rows > 0){
+            echo '<script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Este celular já foi cadastrado.",
             });
         </script>';
         }
@@ -164,7 +177,7 @@
                     </div>
 
                     <div>
-                        <p id="number-attention">Número inválido.</p>
+                        <p id="number-attention">Celular inválido.</p>
                         <label for="" class="short-text-label">
                             <input type="text" class="number-input" minlength="10" maxlength="80" id="phone" name="phone">
                         </label>
