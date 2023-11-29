@@ -40,6 +40,16 @@
         $nascimento = $_POST['nascimento'];
 
         $celular = preg_replace('/[^0-9\+]/', '', $_POST['phone']);
+        $cpf = preg_replace('/[^0-9\+]/', '', $_POST['cpf']);
+        $cep = preg_replace('/[^0-9\+]/', '', $_POST['cep']);
+
+
+        // Verificação de CPF Primary Key
+        $verifyCpf = $mysqli->prepare("SELECT * FROM usuarios WHERE cpf = ?");
+        $verifyCpf->bind_param("s", $cpf);
+        $verifyCpf->execute();
+        $CpfResult = $verifyCpf->get_result();
+        // Verificação de CPF Primary Key
 
         if(empty($nome) || empty($sexo) || empty($cpf) || empty($nome_materno) || empty($celular) || empty($cep) || empty($rua) || empty($bairro) || empty($casa_numero) || empty($cidade) || empty($estado) || empty($login) || empty($senha) || empty($nascimento)){
             echo '<script>
@@ -49,7 +59,17 @@
                   text: "Verifique os campos e tente novamente.",
                 });
                 </script>';
-        } else {
+        } 
+        elseif($CpfResult->num_rows > 0){
+            echo '<script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Este CPF já foi cadastrado.",
+            });
+        </script>';
+        }
+        else {
             $stmt = $mysqli->prepare("INSERT INTO usuarios(nome,sexo,cpf,nome_materno,celular,cep,rua,bairro,casa_numero,cidade,estado,login_usuario,senha,nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssssssssssss", $nome, $sexo, $cpf, $nome_materno, $celular, $cep, $rua, $bairro, $casa_numero, $cidade, $estado, $login, $senha, $nascimento);
 
@@ -121,13 +141,14 @@
                         <p id="sexo-attention">Defina um sexo.</p>
                         <label for="" class="short-text-label">
                             <i class="fa-solid fa-person-half-dress" id="sexo-icon"></i>
-                            <select name="sexo" id="" class="sex-selection" name="sexo">
-                                <option value="">Masculino</option>
-                                <option value="">Feminino</option>
-                                <option value="">Transgênero</option>
-                                <option value="">Não-binário</option>
-                                <option value="">Outros</option>
-                                <option value="">Prefiro não responder</option>
+                            <select id="" class="sex-selection" name="sexo">
+                                <option value="" disabled selected>Defina Seu Sexo</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Trasgenero">Transgênero</option>
+                                <option value="NaoBinario">Não-binário</option>
+                                <option value="Outros">Outros</option>
+                                <option value="PNR">Prefiro não responder</option>
                             </select>
                         </label>
                     </div>
@@ -153,7 +174,7 @@
                         <p id="data-attention">Data inválida.</p>
                         <label for="" class="most-short-text-label">
                             <i class="fa fa-calendar-days" id="data-icon"></i>
-                            <input type="text" class="ushort-input" maxlength="80" id="birthdate" placeholder="dd/mm/aaaa" name="nascimento">
+                            <input type="text" class="ushort-input" maxlength="80" id="birthdate" placeholder="Nascimento" name="nascimento">
                         </label>
                     </div>
                 </section>
@@ -163,7 +184,7 @@
                         <p id="cep-attention">CEP Inválido.</p>
                         <label for="" class="short-text-label">
                         <i class="fa-solid fa-location-dot" id="cep-icon"></i>
-                            <input type="text" placeholder="CEP**" class="short-input" id="cep" minlength="8" maxlength="14" name="cep">
+                            <input type="text" placeholder="CEP**" class="short-input" id="cep" minlength="8" maxlength="8" name="cep">
                         </label>
                     </div>
 
@@ -217,7 +238,7 @@
                     <div>
                         <p id="cep-attention">Login Inválido.</p>
                         <label for="" class="short-text-label">
-                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
+                        <i class="fa-solid fa-right-to-bracket" id="cep-icon"></i>
                             <input type="text" placeholder="Defina um login**" class="short-input" id="login" minlength="8" maxlength="14" name="login">
                         </label>
                     </div>
@@ -225,18 +246,18 @@
                 <br>
                 <section class="register-display">
                     <div>
-                        <p id="cep-attention">Senha Inválida.</p>
+                        <p id="senha-attention">Senha Inválida.</p>
                         <label for="" class="short-text-label">
-                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
-                            <input type="password" placeholder="Defina uma senha**" class="short-input" id="senha" minlength="8" maxlength="14" name="senha">
+                        <i class="fa-solid fa-lock" id="senha-icon"></i>
+                            <input type="password" placeholder="Defina uma senha**" class="short-input" id="senha" minlength="8" maxlength="14" name="senha" onkeyup="validarSenha(this)">
                         </label>
                     </div>
 
                     <div>
-                        <p id="cep-attention">Senha Inválida.</p>
+                        <p id="confirmaSenha-attention">Senhas não conferem.</p>
                         <label for="" class="short-text-label">
-                        <i class="fa-solid fa-location-dot" id="cep-icon"></i>
-                            <input type="password" placeholder="Confirme sua senha**" class="short-input" id="confirmaSenha" minlength="8" maxlength="14">
+                        <i class="fa-solid fa-location-dot" id="confirmaSenha-icon"></i>
+                            <input type="password" placeholder="Confirme sua senha**" class="short-input" id="confirmaSenha" minlength="8" maxlength="14" onkeyup="validarConfirmaSenha()">
                         </label>
                     </div>
                 </section>
@@ -274,31 +295,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script>
-        $(document).ready(function(){
-        $('#birthdate').mask('00/00/0000');
-
-        $('#birthdate').on('focusout', function() {
-            var birthdate = $(this).val();
-            var birthdateMoment = moment(birthdate, 'DD/MM/YYYY');
-            
-            if (!birthdateMoment.isValid()) {
-            alert('Data inválida.');
-            } else {
-            var years = moment().diff(birthdateMoment, 'years');
-            
-            if (years < 18) {
-                alert('Você precisa ter no mínimo 18 anos.');
-            } else if (years > 100) {
-                alert('A idade máxima permitida é 100 anos.');
-            } else {
-                // A data é válida e a idade está no intervalo permitido.
-                // Você pode continuar com a submissão do formulário.
-            }
-            }
-        });
-        });
-    </script>
     <script src="../script/register.js"></script>
 </body>
 

@@ -15,7 +15,7 @@ main{
     max-height: 150px;
 }
 
-#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention, #cep-attention, #numero-attention, #sexo-attention{
+#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention, #cep-attention, #numero-attention, #sexo-attention, #senha-attention, #confirmaSenha-attention{
     visibility: hidden;
     color: red;
     margin-left: 15px;
