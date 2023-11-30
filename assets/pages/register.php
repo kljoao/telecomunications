@@ -55,6 +55,12 @@
         $verifyPhone->execute();
         $PhoneResult = $verifyPhone->get_result();
 
+                // Verificação de número de telefone
+        $verifyLogin = $mysqli->prepare("SELECT * FROM usuarios WHERE login_usuario = ?");
+        $verifyLogin->bind_param("s", $login);
+        $verifyLogin->execute();
+        $LoginResult = $verifyLogin->get_result();
+
         if(empty($nome) || empty($sexo) || empty($cpf) || empty($nome_materno) || empty($celular) || empty($cep) || empty($rua) || empty($bairro) || empty($casa_numero) || empty($cidade) || empty($estado) || empty($login) || empty($senha) || empty($nascimento)){
             echo '<script>
               Swal.fire({
@@ -63,6 +69,7 @@
                   text: "Verifique os campos e tente novamente.",
                 });
                 </script>';
+                exit();
         } 
         elseif($CpfResult->num_rows > 0){
             echo '<script>
@@ -72,6 +79,7 @@
                 text: "Este CPF já foi cadastrado.",
             });
         </script>';
+        exit();
         }
         elseif($PhoneResult->num_rows > 0){
             echo '<script>
@@ -81,6 +89,16 @@
                 text: "Este celular já foi cadastrado.",
             });
         </script>';
+        }
+        elseif($LoginResult->num_rows > 0){
+            echo '<script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Este login já foi cadastrado.",
+            });
+        </script>';
+        exit();
         }
         else {
             $stmt = $mysqli->prepare("INSERT INTO usuarios(nome,sexo,cpf,nome_materno,celular,cep,rua,bairro,casa_numero,cidade,estado,login_usuario,senha,nascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
