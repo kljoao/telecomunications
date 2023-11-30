@@ -1,36 +1,63 @@
 <?php
+require_once '../../vendor/autoload.php'; // Caminho para o autoload do Composer
 
-// session_start();
-// include("../protections/conection.php");
+use Twilio\Rest\Client;
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $verification_code = $_POST['verification_code'];
+// Credenciais do Twilio
+$account_sid = 'AC44bf65cd9f5fe250dec11dafe304757a';
+$auth_token = 'db15b1912395871260e5d756f18684b5';
 
-//     if ($verification_code == $_SESSION['verification_code']) {
-//         // Atualizar o campo verifiedNumber para true
-//         $stmt = $mysqli->prepare("UPDATE users SET verifiedNumber = 1 WHERE email = ?");
-//         $stmt->bind_param("s", $_SESSION['email']);
-//         $stmt->execute();
+session_start();
 
-//         // Redirecionar para a página inicial
-//         header("Location: ../indexusertest.php");
-//         exit;
-//     } else {
-//         echo '<script>
-//         Swal.fire({
-//           icon: "error",
-//           title: "Oops...",
-//           text: "Wrong verification code! Please, try again.",
-//         });
-//         </script>';
-//     }
-// }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Código de verificação inserido pelo usuário
+    $userCode = $_POST['verification_code'];
+
+    // Código de verificação armazenado na sessão
+    $sessionCode = $_SESSION['verification_code'];
+
+    if ($userCode === $sessionCode) {
+        // Redirecionar para a página 'usuario.php'
+        header('Location: usuario.php');
+        exit();
+    } else {
+        echo '<script>
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Código de verificação incorreto. Tente novamente.",
+        });
+        </script>';
+    }
+} else {
+    // Número de telefone do usuário
+    $phoneNumber = $_SESSION['phone'];
+
+    // Gerar um código de verificação aleatório
+    $verificationCode = rand(100000, 999999);
+
+    // Armazenar o código de verificação na sessão
+    $_SESSION['verification_code'] = $verificationCode;
+
+    // Inicializar o cliente do Twilio
+    $client = new Client($account_sid, $auth_token);
+
+    // Enviar o código de verificação via SMS
+    $message = $client->messages->create(
+        $phoneNumber,
+        array(
+            'from' => '+14159407373',
+            'body' => "Seu código de verificação é: $verificationCode"
+        )
+    );
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Verificação</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;

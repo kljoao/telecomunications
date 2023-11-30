@@ -15,10 +15,12 @@ main{
     max-height: 150px;
 }
 
-#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention, #cep-attention, #numero-attention, #sexo-attention, #senha-attention, #confirmaSenha-attention{
+#nome-attention, #cpf-attention, #materno-attention, #number-attention, #data-attention, #cep-attention, #numero-attention, #sexo-attention, #senha-attention, #confirmaSenha-attention, #login-attention{
     visibility: hidden;
     color: red;
     margin-left: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 
 .register-display{

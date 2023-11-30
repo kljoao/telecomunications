@@ -5,11 +5,12 @@ validNumber = false
 validCep = false
 validIdade = false
 validSenha = false
+validConfirmaSenha = false
 
 //Validador Nome
   const name = document.querySelector("#name");
 
-  name.addEventListener("keypress", function(e) {
+  name.addEventListener("focusout", function(e) {
       if(!checkChar(e)) {
         e.preventDefault();
     }
@@ -26,7 +27,7 @@ validSenha = false
   const nomeAttention = document.querySelector('#nome-attention');
   const nameIcon = document.querySelector('#nome-icon');
   // VALIDADOR DE TAMANHO DE NOME
-  name.addEventListener('keyup', () => {
+  name.addEventListener('focusout', () => {
     if(name.value.length < 15){
       nomeAttention.setAttribute('style', 'visibility: visible;');
       nameIcon.setAttribute('style', 'color: red');
@@ -109,10 +110,10 @@ function validarCPF(cpf) {
   return true;
 }
 
-cpf.addEventListener('', function() {
-  var cpf = this.value;
+cpf.addEventListener('focusout', function() {
+  var cpfValue = this.value;
 
-  if (validarCPF(cpf)) {
+  if (validarCPF(cpfValue)) {
     checkCPF.setAttribute('style', 'visibility: hidden;')
     cpfColor.setAttribute('style', 'color: green;')
     cpf.setAttribute('style', 'color: green;')
@@ -126,13 +127,10 @@ cpf.addEventListener('', function() {
 });
 //Validador CPF
 
-
-
-
 //Validador Nome Materno
 const nomeMaterno = document.querySelector("#nomeMaternoInput");
 
-nomeMaterno.addEventListener("keypress", function(e) {
+nomeMaterno.addEventListener("focusout", function(e) {
     if(!checkChar(e)) {
       e.preventDefault();
   }
@@ -149,7 +147,7 @@ function checkChar(e) {
 const maternoAttention = document.querySelector('#materno-attention');
 const maternoIcon = document.querySelector('#materno-icon');
 // VALIDADOR DE TAMANHO DE NOME
-nomeMaterno.addEventListener('keyup', () => {
+nomeMaterno.addEventListener('focusout', () => {
   if(nomeMaterno.value.length < 15){
     maternoAttention.setAttribute('style', 'visibility: visible;');
     maternoIcon.setAttribute('style', 'color: red');
@@ -188,10 +186,13 @@ telefone.addEventListener('blur', function() {
 });
 
 telefone.addEventListener('input', function() {
-    var countryCode = iti.getSelectedCountryData().dialCode;
-    if (telefone.value.length < countryCode.length || telefone.value.slice(0, countryCode.length) !== "+" + countryCode) {
-        telefone.value = "+" + countryCode;
-    }
+  var countryCode = iti.getSelectedCountryData().dialCode;
+  var currentInputValue = telefone.value.replace(/\D/g,''); // remove non-digit characters
+  var currentCountryCode = currentInputValue.slice(0, countryCode.length);
+
+  if (currentCountryCode !== countryCode) {
+      telefone.value = "+" + countryCode + currentInputValue.slice(countryCode.length);
+  }
 });
 
 const cep = document.querySelector('#cep');
@@ -237,6 +238,7 @@ cep.addEventListener('focusout', () => {
     cepAttention.setAttribute('style', 'visibility: hidden');
     cep.setAttribute('style', 'color: green;');
     cepIcon.setAttribute('style', 'color: green;');
+    validCep = true
     cepValue = mascaraCEP(cepValue);
     cep.value = cepValue;
 
@@ -255,6 +257,7 @@ cep.addEventListener('focusout', () => {
     cepAttention.setAttribute('style', 'visibility: visible');
     cepIcon.setAttribute('style', 'color: red;');
     cep.setAttribute('style', 'color: red;');
+    validCep = false
   }
 });
 
@@ -300,7 +303,7 @@ $(document).ready(function(){
           Swal.fire({
               position: "top-end",
               icon: "error",
-              title: "Você precisa ter no máximo 100 anos.",
+              title: "Data inválida.",
               showConfirmButton: false,
               timer: 1500
             });
@@ -370,11 +373,29 @@ function validarConfirmaSenha(){
     confirmaSenhaAttention.setAttribute('style', 'visibility: visible;')
     confirmaSenhaIcon.setAttribute('style', 'color: red;')
     confirmaSenha.setAttribute('style', 'color: red;')
+    validConfirmaSenha = false
   }
   else{
     confirmaSenhaAttention.setAttribute('style', 'visibility: hidden;')
     confirmaSenhaIcon.setAttribute('style', 'color: green;')
     confirmaSenha.setAttribute('style', 'color: green;')
+    validConfirmaSenha = true
   }
 }
 //Validador ConfirmaSENHA
+
+// Adicione um ouvinte de evento 'submit' ao seu formulário
+$('form').on('submit', function(e) {
+    // Verifique todas as validações
+    if (validName && validCpf && validMaterno && validNumber && validCep && validIdade && validSenha && validConfirmaSenha == true) {
+        // Se alguma das validações falhar, evite que o formulário seja enviado
+        e.preventDefault();
+
+        // Mostre um alerta SweetAlert
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Por favor, verifique os campos e tente novamente.',
+        });
+    }
+});

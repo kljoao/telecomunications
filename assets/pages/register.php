@@ -96,6 +96,16 @@
                     timer: 1500
                   });
                 </script>';
+
+                session_start();
+                $_SESSION['nome'] = $nome;
+                $_SESSION['login'] = $login;
+                $_SESSION['cpf'] = $cpf;
+                $_SESSION['phone'] = $celular;
+
+                $_SESSION['status'] = 'pendente';
+
+                header('Location: verify.php');
             } else {
                 echo "Erro: " . $stmt->error;
             }
@@ -105,7 +115,7 @@
 
     <nav class="nav">
         <div class="nav-container">
-            <a href="index.php"><img src="../img/logo-head.png" alt="" width="175px"></a>
+            <a href="../../index.php"><img src="../img/logo-head.png" alt="" width="175px"></a>
             <ul class="nav-options">
                 <a href="" class="medium-16-blue effect-1"><li>Internet</li></a>
                 <a href="" class="medium-16-blue effect-1"><li>Telefonia</li></a>
@@ -114,7 +124,7 @@
             </ul>
         </div>
         <div class="nav-left">
-            <a href="../../index.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
+            <a href="login.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>Area do Cliente</p></button></a>
             <div class="nav-contact">
             <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
                 <div>
@@ -124,8 +134,6 @@
             </div>
         </div>
     </nav>
-
-
 
     <main>
         <h1 class="black-normal-40">Crie sua conta Telecall</h1>
@@ -138,7 +146,7 @@
                         <p id="nome-attention">Nome Inválido.</p>
                         <label for="" class="text-label">
                             <i class="fa-solid fa-user" id="nome-icon"></i>
-                            <input type="text" placeholder="Nome Completo**" class="long-input" id="name" minlength="15" maxlength="80" name="nome">
+                            <input type="text" placeholder="Nome Completo**" class="long-input" id="name" name="nome"> 
                         </label>
                     </div>
 
@@ -154,12 +162,11 @@
                         <p id="sexo-attention">Defina um sexo.</p>
                         <label for="" class="short-text-label">
                             <i class="fa-solid fa-person-half-dress" id="sexo-icon"></i>
-                            <select id="" class="sex-selection" name="sexo">
-                                <option value="" disabled selected>Defina Seu Sexo</option>
+                            <select name="sexo" id="" class="sex-selection">
+                                <option disabled selected>Defina Seu Sexo</option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Feminino">Feminino</option>
                                 <option value="Trasgenero">Transgênero</option>
-                                <option value="NaoBinario">Não-binário</option>
                                 <option value="Outros">Outros</option>
                                 <option value="PNR">Prefiro não responder</option>
                             </select>
@@ -249,9 +256,9 @@
                 <br>
                 <section class="register-display">
                     <div>
-                        <p id="cep-attention">Login Inválido.</p>
+                        <p id="login-attention">Login Inválido.</p>
                         <label for="" class="short-text-label">
-                        <i class="fa-solid fa-right-to-bracket" id="cep-icon"></i>
+                        <i class="fa-solid fa-right-to-bracket" id="login-icon"></i>
                             <input type="text" placeholder="Defina um login**" class="short-input" id="login" minlength="8" maxlength="14" name="login">
                         </label>
                     </div>
