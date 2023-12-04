@@ -21,6 +21,17 @@ include('../../app/protection.php');
 </head>
 <body>
 
+<?php
+
+    if(isset($_POST['logout'])){
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: ../../index.php");
+        exit();
+    }
+
+?>
 
     <nav class="nav">
         <div class="nav-container">
@@ -33,7 +44,9 @@ include('../../app/protection.php');
             </ul>
         </div>
         <div class="nav-left">
-            <a href="login.php" class="nav-area"><button class="nav-button"><i class="fa-solid fa-user"></i><p>SAIR</p></button></a>
+            <form action="" method="POST">
+                <a href="" class="nav-area"><button class="nav-button" name="logout"><i class="fa-solid fa-user"></i><p>SAIR</p></button></a>
+            </form>
             <div class="nav-contact">
             <span class="material-symbols-outlined" style="color: grey; font-size: 35px;">headset_mic</span>
                 <div>
@@ -56,8 +69,7 @@ include('../../app/protection.php');
             <p class="black-normal-20">Celular Cadastrado</p>
             <input type="password" id="user-block-input" name="senha" placeholder="<?php echo $_SESSION['phone'] ?>" readonly><br>
 
-            <a href="#" id="lost-key">Esqueceu sua senha?</a><br><br>
-            <input id="login-btn" type="submit" value="Entrar"><br><br>
+            <h1 style="text-align: center; font-family: Arial">Alterar Senha</h1><br><br>
         </form>
     </div>
 </body>
