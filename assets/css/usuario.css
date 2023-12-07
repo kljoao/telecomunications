@@ -18,7 +18,7 @@
     width: 300px;
 }
 
-#user-block-input {
+#user-block-input, #user-unblock-input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -30,7 +30,12 @@
     cursor: not-allowed;
 }
 
-#user-block-input:focus{
+#user-unblock-input{
+    background-color: white !important;
+    cursor: pointer;
+}
+
+#user-block-input:focus, #user-unblock-input:focus{
     outline: 0;
 }
 
