@@ -93,10 +93,10 @@ include('../../app/normal_protection.php');
             <br>
             <h1 style="text-align: center; font-family: Arial">Alterar Senha</h1><br><br>
             <p class="black-normal-20">Nova senha</p>
-            <input type="password" id="user-block-input" name="newPassword" required><br>
+            <input type="password" style="color: black !important;" id="user-unblock-input" name="newPassword" required><br>
 
             <p class="black-normal-20">Confirme a nova senha</p>
-            <input type="password" id="user-block-input" name="confirmPassword" required><br>
+            <input type="password" id="user-unblock-input" style="color: black !important;" name="confirmPassword" required><br>
 
             <input type="submit" value="Trocar senha">
         </form>
