@@ -9,8 +9,8 @@ require_once '../../vendor/autoload.php'; // Caminho para o autoload do Composer
 use Twilio\Rest\Client;
 
 // Credenciais do Twilio
-$account_sid = 'AC44bf65cd9f5fe250dec11dafe304757a';
-$auth_token = '51d553227bc1811a4926248be9723608';
+// $account_sid = 'AC44bf65cd9f5fe250dec11dafe304757a';
+// $auth_token = 'ae26fb764fc445f0d97fa98e7fe9b8cf';
 ?>
 
 <!DOCTYPE html>

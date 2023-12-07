@@ -36,20 +36,17 @@ include('../../app/normal_protection.php');
         $confirmPassword = $_POST["confirmPassword"];
     
         if ($newPassword == $confirmPassword) {
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $sql = "UPDATE users SET password='$hashedPassword' WHERE id=".$_SESSION['id'];
-            if ($conn->query($sql) === TRUE) {
-                echo '<script>
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Usuário cadastrado.",
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-                </script>';
+            if (preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*\W).{8,}$/', $newPassword)) {
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+                $cpf = $_SESSION['cpf'];
+                $sql = "UPDATE usuarios SET senha='$hashedPassword' WHERE cpf='$cpf'";
+                if ($mysqli->query($sql) === TRUE) {
+                    echo "Senha alterada com sucesso!";
+                } else {
+                    echo "Erro ao alterar a senha: " . $mysqli->error;
+                }
             } else {
-                echo "Erro ao alterar a senha: " . $conn->error;
+                echo "A senha deve ter no mínimo 8 dígitos, uma letra maiúscula, um caracter especial e um número.";
             }
         } else {
             echo "As senhas não coincidem!";
