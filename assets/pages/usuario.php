@@ -1,6 +1,6 @@
 <?php
 include('../../app/database.php');
-include('../../app/protection.php');
+include('../../app/normal_protection.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +31,31 @@ include('../../app/protection.php');
         exit();
     }
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $newPassword = $_POST["newPassword"];
+        $confirmPassword = $_POST["confirmPassword"];
+    
+        if ($newPassword == $confirmPassword) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $sql = "UPDATE users SET password='$hashedPassword' WHERE id=".$_SESSION['id'];
+            if ($conn->query($sql) === TRUE) {
+                echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Usuário cadastrado.",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                </script>';
+            } else {
+                echo "Erro ao alterar a senha: " . $conn->error;
+            }
+        } else {
+            echo "As senhas não coincidem!";
+        }
+    }
+
 ?>
 
     <nav class="nav">
@@ -58,7 +83,7 @@ include('../../app/protection.php');
     </nav>
 
     <div id="user-content">
-        <form>
+        <form method="POST" action="">
             <h1 style="text-align: center; font-family: Arial">Dados Cadastrais</h1><br><br>
             <p class="black-normal-20">Nome Completo</p>
             <input type="text" id="user-block-input" name="nomeCompleto" placeholder="<?php echo $_SESSION['nome'] ?>" readonly><br>
@@ -68,8 +93,15 @@ include('../../app/protection.php');
 
             <p class="black-normal-20">Celular Cadastrado</p>
             <input type="password" id="user-block-input" name="senha" placeholder="<?php echo $_SESSION['phone'] ?>" readonly><br>
-
+            <br>
             <h1 style="text-align: center; font-family: Arial">Alterar Senha</h1><br><br>
+            <p class="black-normal-20">Nova senha</p>
+            <input type="password" id="user-block-input" name="newPassword" required><br>
+
+            <p class="black-normal-20">Confirme a nova senha</p>
+            <input type="password" id="user-block-input" name="confirmPassword" required><br>
+
+            <input type="submit" value="Trocar senha">
         </form>
     </div>
 </body>

@@ -1,5 +1,7 @@
 <?php
 
+include('../../app/database.php');
+
 session_start();
 
 require_once '../../vendor/autoload.php'; // Caminho para o autoload do Composer
@@ -72,9 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (strval($userCode) === strval($sessionCode)) {
         $_SESSION['status'] = 'verificado';
-        // Redirecionar para a página 'usuario.php'
-        header('Location: usuario.php');
-        exit();
+        
+        // Verificar o tipo de usuário
+        if($_SESSION['user_type'] == 1){
+            // Redirecionar para a página 'other.php'
+            header('Location: other.php');
+            exit();
+        } else {
+            // Redirecionar para a página 'usuario.php'
+            header('Location: usuario.php');
+            exit();
+        }
     } else {
         echo '<script>
         Swal.fire({

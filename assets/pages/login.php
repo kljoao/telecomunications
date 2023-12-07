@@ -10,6 +10,7 @@
     <title>Oficial Telecall</title>
     <!-- Fonts API -->
     <script src="https://kit.fontawesome.com/4713c304f5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Fonts API -->
     <!-- Google Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..46,100..700,0..1,-50..200" />
@@ -19,58 +20,55 @@
 <body id="login-body">
 
 <?php
-session_start(); // Inicia uma nova sessão ou retoma a sessão existente
+    session_start();
 
-if(isset($_SESSION['login_usuario'])){
-    header('Location: usuario.php');
-    exit();
-}
+    if(isset($_POST['loginValid'])){
+        $login = $_POST['login-input'];
+        $senha = $_POST['senha-input'];
 
-if(isset($_POST['loginValid'])){
-    $login = $_POST['login-input'];
-    $senha = $_POST['senha-input'];
-
-    // Proteção contra injeção de SQL
-    $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE login_usuario = ?");
-    $stmt->bind_param("s", $login);
-
-    if ($stmt->execute()) {
+        $query = "SELECT * FROM usuarios WHERE login_usuario = ?";
+        $stmt = $mysqli->prepare($query);
+        $stmt->bind_param("s", $login);
+        $stmt->execute();
         $result = $stmt->get_result();
-        if ($result->num_rows === 1) {
-            // O usuário existe, agora vamos verificar a senha
-            $row = $result->fetch_assoc();
-            if (password_verify($senha, $row['senha'])) {
-                // A senha está correta
-                $_SESSION['login_usuario'] = $login; // Armazena o 'login_usuario' na sessão
-                header("location: verify.php");
-                exit;
+        $row = $result->fetch_assoc();
+
+        if($row){
+            if(password_verify($senha, $row['senha'])){
+                // A senha está correta.
+                $_SESSION['login'] = $login;
+                $_SESSION['phone'] = $row['celular'];
+                $_SESSION['nome'] = $row['nome'];
+                $_SESSION['cpf'] = $row['cpf'];
+                $_SESSION['user_type'] = $row['user_type'];
+                if(isset($_SESSION['status']) && $_SESSION['status'] == 'verificado'){
+                    header('Location: usuario.php');
+                } 
+                else {
+                    header('Location: verify.php');
+                }
             } else {
-                // A senha está incorreta
-                $error = '<script>
+                // A senha está incorreta.
+                echo "<script>
                 Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Login ou senha inválidos.",
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Usuário ou senha inválidos.',
                 });
-                </script>';
+                </script>";
             }
         } else {
-            // O usuário não existe
-            $error = '<script>
+            // O usuário não existe.
+            echo "<script>
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Login ou senha inválidos.",
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Usuário ou senha inválidos.',
             });
-            </script>';
+            </script>";
         }
-    } else {
-        // A consulta falhou
-        echo "Erro na consulta: " . $mysqli->error;
     }
-}
 ?>
-
 
     <nav class="nav">
             <div class="nav-container">
